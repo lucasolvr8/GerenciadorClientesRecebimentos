@@ -1,0 +1,59 @@
+package services;
+
+import models.Cliente;
+import java.util.ArrayList;
+import java.util.List;
+
+public class SistemaGerenciador implements Verificacao {
+    private List<Cliente> clientes;
+
+    public SistemaGerenciador() {
+        this.clientes = new ArrayList<>();
+    }
+
+    public void cadastrarCliente(Cliente cliente) {
+        if (!verificarCadastro(cliente.getCpf())) {
+            clientes.add(cliente);
+            System.out.println("Cliente cadastrado com sucesso!");
+        } else {
+            System.out.println("Erro: Já existe um cliente com este CPF.");
+        }
+    }
+
+    public void listarClientes() {
+        if (clientes.isEmpty()) {
+            System.out.println("Nenhum cliente cadastrado.");
+        } else {
+            for (Cliente cliente : clientes) {
+                cliente.exibirDetalhes();
+            }
+        }
+    }
+
+    public void excluirCliente(String cpf) {
+        Cliente clienteRemover = null;
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equals(cpf)) {
+                clienteRemover = cliente;
+                break;
+            }
+        }
+
+        if (clienteRemover != null) {
+            clientes.remove(clienteRemover);
+            System.out.println("Cliente removido com sucesso!");
+        } else {
+            System.out.println("Erro: Cliente não encontrado.");
+        }
+    }
+
+    @Override
+    public boolean verificarCadastro(String cpf) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getCpf().equals(cpf)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

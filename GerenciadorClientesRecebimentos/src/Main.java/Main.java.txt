@@ -1,0 +1,51 @@
+import models.Cliente;
+import services.SistemaGerenciador;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        SistemaGerenciador sistema = new SistemaGerenciador();
+        Scanner scanner = new Scanner(System.in);
+
+        int opcao;
+        do {
+            System.out.println("\n=== Sistema Gerenciador de Clientes ===");
+            System.out.println("1. Cadastrar Cliente");
+            System.out.println("2. Listar Clientes");
+            System.out.println("3. Excluir Cliente");
+            System.out.println("4. Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = scanner.nextInt();
+            scanner.nextLine(); // Limpar buffer
+
+            switch (opcao) {
+                case 1 -> {
+                    System.out.print("Nome: ");
+                    String nome = scanner.nextLine();
+                    System.out.print("CPF: ");
+                    String cpf = scanner.nextLine();
+                    System.out.print("Empreendimento: ");
+                    String empreendimento = scanner.nextLine();
+                    System.out.print("Unidade: ");
+                    String unidade = scanner.nextLine();
+                    System.out.print("Valor do Contrato: ");
+                    double valorContrato = scanner.nextDouble();
+                    scanner.nextLine(); // Limpar buffer
+
+                    Cliente cliente = new Cliente(nome, cpf, empreendimento, unidade, valorContrato);
+                    sistema.cadastrarCliente(cliente);
+                }
+                case 2 -> sistema.listarClientes();
+                case 3 -> {
+                    System.out.print("Informe o CPF do cliente a ser excluído: ");
+                    String cpf = scanner.nextLine();
+                    sistema.excluirCliente(cpf);
+                }
+                case 4 -> System.out.println("Saindo do sistema...");
+                default -> System.out.println("Opção inválida. Tente novamente.");
+            }
+        } while (opcao != 4);
+
+        scanner.close();
+    }
+}

@@ -1,0 +1,46 @@
+package models;
+
+public class Cliente extends Pessoa {
+    private String empreendimento;
+    private String unidade;
+    private double valorContrato;
+
+    public Cliente(String nome, String cpf, String empreendimento, String unidade, double valorContrato) {
+        super(nome, cpf);
+        this.empreendimento = empreendimento;
+        this.unidade = unidade;
+        this.valorContrato = valorContrato;
+    }
+
+    public String getEmpreendimento() {
+        return empreendimento;
+    }
+
+    public void setEmpreendimento(String empreendimento) {
+        this.empreendimento = empreendimento;
+    }
+
+    public String getUnidade() {
+        return unidade;
+    }
+
+    public void setUnidade(String unidade) {
+        this.unidade = unidade;
+    }
+
+    public double getValorContrato() {
+        return valorContrato;
+    }
+
+    public void setValorContrato(double valorContrato) {
+        this.valorContrato = valorContrato;
+    }
+
+    @Override
+    public void exibirDetalhes() {
+        System.out.println("Cliente: " + getNome() + " | CPF: " + getCpf() +
+                           " | Empreendimento: " + empreendimento +
+                           " | Unidade: " + unidade +
+                           " | Valor do Contrato: R$ " + valorContrato);
+    }
+}
